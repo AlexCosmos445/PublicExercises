@@ -1,11 +1,11 @@
-using ShapeLibrary;
+п»їusing ShapeLibrary;
 
 namespace TestShapeSpace
 {
     [TestFixture]
     public class TestShapeClass
     {
-        private const double DELTA = 0; //приемлемая для тестов ошибка сравнения чисел double
+        private const double DELTA = 0; //РїСЂРёРµРјР»РµРјР°СЏ РґР»СЏ С‚РµСЃС‚РѕРІ РѕС€РёР±РєР° СЃСЂР°РІРЅРµРЅРёСЏ С‡РёСЃРµР» double
 
         [SetUp]
         public void Setup()
@@ -13,29 +13,29 @@ namespace TestShapeSpace
         
         #region TriangleTests
         [Test]
-        public void CreateTriangleTest1() //тест создания треугольника с некорректными длинами сторон
+        public void CreateTriangleTest1() //С‚РµСЃС‚ СЃРѕР·РґР°РЅРёСЏ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР° СЃ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹РјРё РґР»РёРЅР°РјРё СЃС‚РѕСЂРѕРЅ
         {
 
-            Assert.Catch<NotTriangleException>(() => new Triangle(3, 4, 8)); //сумма двух сторон меньше третьей
-            Assert.Catch<NotTriangleException>(() => new Triangle(3, 4, 7)); //сумма двух сторон равна третьей 
-            Assert.Catch<NotTriangleException>(() => new Triangle(3, -4, 5)); //одна из сторон отрицательная 
-            Assert.Catch<NotTriangleException>(() => new Triangle(0, 4, 5)); //одна из сторон имеет нулевую длину 
+            Assert.Catch<NotTriangleException>(() => new Triangle(3, 4, 8)); //СЃСѓРјРјР° РґРІСѓС… СЃС‚РѕСЂРѕРЅ РјРµРЅСЊС€Рµ С‚СЂРµС‚СЊРµР№
+            Assert.Catch<NotTriangleException>(() => new Triangle(3, 4, 7)); //СЃСѓРјРјР° РґРІСѓС… СЃС‚РѕСЂРѕРЅ СЂР°РІРЅР° С‚СЂРµС‚СЊРµР№ 
+            Assert.Catch<NotTriangleException>(() => new Triangle(3, -4, 5)); //РѕРґРЅР° РёР· СЃС‚РѕСЂРѕРЅ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅР°СЏ 
+            Assert.Catch<NotTriangleException>(() => new Triangle(0, 4, 5)); //РѕРґРЅР° РёР· СЃС‚РѕСЂРѕРЅ РёРјРµРµС‚ РЅСѓР»РµРІСѓСЋ РґР»РёРЅСѓ 
         }
         [Test]
-        public void CreateTriangleTest2() //тест создания треугольника с неправильными координатами
+        public void CreateTriangleTest2() //С‚РµСЃС‚ СЃРѕР·РґР°РЅРёСЏ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР° СЃ РЅРµРїСЂР°РІРёР»СЊРЅС‹РјРё РєРѕРѕСЂРґРёРЅР°С‚Р°РјРё
         {         
-            Assert.Catch<NotTriangleException>(() => new Triangle(new List<Vertex>() { new Vertex(0, 0), new Vertex(1, 1), new Vertex(2, 2) })); //три точки на одной прямой
-            Assert.Catch<NotTriangleException>(() => new Triangle(new List<Vertex>() { new Vertex(0, 0), new Vertex(0, 1), new Vertex(0, 2) })); //три точки на оси
-            Assert.Catch<NotTriangleException>(() => new Triangle(new List<Vertex>() { new Vertex(0, 0), new Vertex(1, 1), new Vertex(1, 1) })); //две точки одинаковые
-            Assert.Catch<NotTriangleException>(() => new Triangle(new List<Vertex>() { new Vertex(0, 0), new Vertex(0, 0), new Vertex(0, 0) })); //три точки одинаковые
+            Assert.Catch<NotTriangleException>(() => new Triangle(new List<Vertex>() { new Vertex(0, 0), new Vertex(1, 1), new Vertex(2, 2) })); //С‚СЂРё С‚РѕС‡РєРё РЅР° РѕРґРЅРѕР№ РїСЂСЏРјРѕР№
+            Assert.Catch<NotTriangleException>(() => new Triangle(new List<Vertex>() { new Vertex(0, 0), new Vertex(0, 1), new Vertex(0, 2) })); //С‚СЂРё С‚РѕС‡РєРё РЅР° РѕСЃРё
+            Assert.Catch<NotTriangleException>(() => new Triangle(new List<Vertex>() { new Vertex(0, 0), new Vertex(1, 1), new Vertex(1, 1) })); //РґРІРµ С‚РѕС‡РєРё РѕРґРёРЅР°РєРѕРІС‹Рµ
+            Assert.Catch<NotTriangleException>(() => new Triangle(new List<Vertex>() { new Vertex(0, 0), new Vertex(0, 0), new Vertex(0, 0) })); //С‚СЂРё С‚РѕС‡РєРё РѕРґРёРЅР°РєРѕРІС‹Рµ
         }
 
         [Test] 
-        public void CalculationAccuracyTest() //тест на достаточность точности вычислений
+        public void CalculationAccuracyTest() //С‚РµСЃС‚ РЅР° РґРѕСЃС‚Р°С‚РѕС‡РЅРѕСЃС‚СЊ С‚РѕС‡РЅРѕСЃС‚Рё РІС‹С‡РёСЃР»РµРЅРёР№
         {
-            //создаю два равных треугольника разными способами
+            //СЃРѕР·РґР°СЋ РґРІР° СЂР°РІРЅС‹С… С‚СЂРµСѓРіРѕР»СЊРЅРёРєР° СЂР°Р·РЅС‹РјРё СЃРїРѕСЃРѕР±Р°РјРё
             var tr1 = new Triangle(3, 4, 5);
-            var tr2 = new Triangle(new List<Vertex>() { new Vertex(0.5, 0.5), new Vertex(0.5, 3.5), new Vertex(4.5, 0.5) }); //в этом треугольнике стороны рассчитываются в конструкторе
+            var tr2 = new Triangle(new List<Vertex>() { new Vertex(0.5, 0.5), new Vertex(0.5, 3.5), new Vertex(4.5, 0.5) }); //РІ СЌС‚РѕРј С‚СЂРµСѓРіРѕР»СЊРЅРёРєРµ СЃС‚РѕСЂРѕРЅС‹ СЂР°СЃСЃС‡РёС‚С‹РІР°СЋС‚СЃСЏ РІ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂРµ
             double[] tr1Sides = {tr1.a, tr1.b, tr1.c};
             double[] tr2Sides = {tr2.a, tr2.b, tr2.c};
             Array.Sort(tr1Sides);
@@ -48,13 +48,13 @@ namespace TestShapeSpace
         }
 
         [Test]
-        public void RightAngleTriangleTest1() //проверяет прямоугольность треугольника, заданного через стороны
+        public void RightAngleTriangleTest1() //РїСЂРѕРІРµСЂСЏРµС‚ РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРѕСЃС‚СЊ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР°, Р·Р°РґР°РЅРЅРѕРіРѕ С‡РµСЂРµР· СЃС‚РѕСЂРѕРЅС‹
         {
             var rightTr = new Triangle(3, 4, 5);
             Assert.IsTrue(rightTr.IsRight);
         }
         [Test]
-        public void RightAngleTriangleTest2() //проверяет прямоугольность треугольника, заданного через координаты
+        public void RightAngleTriangleTest2() //РїСЂРѕРІРµСЂСЏРµС‚ РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРѕСЃС‚СЊ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР°, Р·Р°РґР°РЅРЅРѕРіРѕ С‡РµСЂРµР· РєРѕРѕСЂРґРёРЅР°С‚С‹
         {
             var rightTr = new Triangle(new List<Vertex>() { new Vertex(0, 0), new Vertex(0, 3), new Vertex(4, 0) });
             Assert.IsTrue(rightTr.IsRight);
@@ -72,8 +72,8 @@ namespace TestShapeSpace
         public void PolygonAreaTest()  
         {
             var tr = new Triangle(new List<Vertex>() { new Vertex(0.5, 0.5), new Vertex(0.5, 3.5), new Vertex(4.5, 0.5) }); 
-            var tr_sp = new SimplePolygon(new List<Vertex>() { new Vertex(0.5, 0.5), new Vertex(0.5, 3.5), new Vertex(4.5, 0.5) }); //треугольник как частный случай многоугольника
-            var sq = new SimplePolygon(new List<Vertex>() { new Vertex(0, 0), new Vertex(3, 4), new Vertex(6, 4), new Vertex(3, 0) }); //параллелограмм
+            var tr_sp = new SimplePolygon(new List<Vertex>() { new Vertex(0.5, 0.5), new Vertex(0.5, 3.5), new Vertex(4.5, 0.5) }); //С‚СЂРµСѓРіРѕР»СЊРЅРёРє РєР°Рє С‡Р°СЃС‚РЅС‹Р№ СЃР»СѓС‡Р°Р№ РјРЅРѕРіРѕСѓРіРѕР»СЊРЅРёРєР°
+            var sq = new SimplePolygon(new List<Vertex>() { new Vertex(0, 0), new Vertex(3, 4), new Vertex(6, 4), new Vertex(3, 0) }); //РїР°СЂР°Р»Р»РµР»РѕРіСЂР°РјРј
             Assert.AreEqual(6, tr_sp.GetArea(), DELTA);
             Assert.AreEqual(tr.GetArea(), tr_sp.GetArea(), DELTA);
             Assert.AreEqual(12, sq.GetArea(), DELTA);
