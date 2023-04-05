@@ -5,7 +5,7 @@ public class Program
     {
         //var v = new List<Vertex>() { new Vertex (0,0) , new Vertex(1,1), new Vertex(2,2)};
         //var v = new List<Vertex>() { new Vertex (0,0) , new Vertex(0,3), new Vertex(4,0)};
-        var v = new List<Vertex>() { new Vertex (0,0) , new Vertex(0,0), new Vertex(0,3)};
+        var v = new List<Vertex>() { new Vertex (0,0) , new Vertex(1,0), new Vertex(1, 1), new Vertex(0, 1) };
         
         SimplePolygon sp = new SimplePolygon(v);
         //Triangle tr = new Triangle(v);

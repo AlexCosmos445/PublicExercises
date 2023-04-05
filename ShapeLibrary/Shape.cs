@@ -33,7 +33,7 @@ namespace ShapeLibrary
     /// </summary>
     public class SimplePolygon : Shape
     {
-        protected List<Vertex> vertices;
+        public readonly List<Vertex> vertices;
 
         public SimplePolygon(string name, List<Vertex> v) : base(name) //для отдельных многоугольников можно задать особое имя
         {
@@ -114,7 +114,7 @@ namespace ShapeLibrary
         public override double GetArea()
         {
             double p = (a + b + c) / 2; //полупериметр
-            return Sqrt(p * (p - a) * (p - b) * (p - c));
+            return Sqrt(p * (p - a) * (p - b) * (p - c)); //расчет площади треугольника по формуле Герона
         }
     }
 
@@ -138,7 +138,7 @@ namespace ShapeLibrary
 
         public override double GetArea()
         {
-            return PI * Radius * Radius; //Or Math.Pow(Radius, 2)
+            return double.Pi * Radius * Radius; //или Math.Pow(Radius, 2)
         }
     }
 
