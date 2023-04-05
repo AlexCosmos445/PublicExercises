@@ -5,7 +5,7 @@ namespace TestShapeSpace
     [TestFixture]
     public class TestShapeClass
     {
-        private const double DELTA = 0; //приемлемая для тестов ошибка сравнения чисел double
+        private const double DELTA = 0.0000000001; //приемлемая для тестов ошибка сравнения чисел double
 
         [SetUp]
         public void Setup()
