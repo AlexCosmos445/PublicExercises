@@ -17,37 +17,27 @@ namespace ShapeLibrary
         }
     }
 
-    public abstract class Shape //базовая фигура с базовой функциональностью
+    public interface IShape //базовая фигура с базовой функциональностью
     {
-        public string Name { get; }
-
-        public Shape(string name)
-        {
-            Name = name;
-        }
         public abstract double GetArea();
     }
 
     /// <summary>
     /// Класс для представления простых многоугольников (где грани не пересекаются друг с другом)
     /// </summary>
-    public class SimplePolygon : Shape
+    public class SimplePolygon : IShape
     {
-        public readonly List<Vertex> vertices;
+        public readonly List<Vertex> vertices = new List<Vertex>();
 
-        public SimplePolygon(string name, List<Vertex> v) : base(name) //для отдельных многоугольников можно задать особое имя
+        protected SimplePolygon()
         {
-            vertices = new List<Vertex>();
+        }
+        public SimplePolygon(List<Vertex> v)
+        {
             vertices.AddRange(v);
         }
-        protected SimplePolygon(string name) : base(name) //конструктор для классов-наследников, где многоугольник может быть задан не только через координаты вершин
-        {
-            vertices = new List<Vertex>();
-        }
-        public SimplePolygon(List<Vertex> v) : this("SimplePolygon", v) //если имя не указано, то используется умолчальное
-        { }
 
-        public override double GetArea()
+        public double GetArea()
         {
             double area = 0;
             int j = vertices.Count - 1;
@@ -75,7 +65,7 @@ namespace ShapeLibrary
                 return a * a + b * b + c * c == 2 * maxSide * maxSide; //проверка через теорему Пифагора
             }
         }
-        public Triangle(List<Vertex> v) : base("Triangle", v) //создать треугольник через координаты вершин
+        public Triangle(List<Vertex> v) : base(v) //создать треугольник через координаты вершин
         {
             if (!IsTriangle(v))
                 throw new NotTriangleException();
@@ -85,7 +75,7 @@ namespace ShapeLibrary
             c = Sqrt(Pow((v[2].Y - v[0].Y), 2) + Pow((v[2].X - v[0].X), 2));
         }
 
-        public Triangle(double a, double b, double c) : base("Triangle") //создать треугольник через стороны
+        public Triangle(double a, double b, double c)  //создать треугольник через стороны
         {
             if (!IsTriangle(a, b ,c))
                 throw new NotTriangleException();
@@ -111,18 +101,18 @@ namespace ShapeLibrary
                 (v[2].X - v[0].X) * (v[1].Y - v[0].Y) != (v[2].Y - v[0].Y) * (v[1].X - v[0].X); //точки не лежат на одной прямой
         }
 
-        public override double GetArea()
+        public new double GetArea()
         {
             double p = (a + b + c) / 2; //полупериметр
             return Sqrt(p * (p - a) * (p - b) * (p - c)); //расчет площади треугольника по формуле Герона
         }
     }
 
-    public class Circle : Shape
+    public class Circle : IShape
     {
         public Vertex Center { get; }
         public double Radius { get; }
-        public Circle(Vertex center, double radius) : base("Circle")
+        public Circle(Vertex center, double radius)
         {
             if (!IsCircle(radius))
                 throw new NotCircleException();
@@ -136,7 +126,7 @@ namespace ShapeLibrary
             return radius > 0;
         }
 
-        public override double GetArea()
+        public double GetArea()
         {
             return double.Pi * Radius * Radius; //или Math.Pow(Radius, 2)
         }
